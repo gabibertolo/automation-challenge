@@ -1,0 +1,24 @@
+# Command:
+# docker-compose -f docker-compose.yml up -d
+# docker-compose -f docker-compose.yml down
+
+version: '3.8'
+services:
+
+  automation-challenge:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8080"
+
+  report-storage:
+    image: nginx:1.23
+    volumes:
+      - reports:/usr/share/nginx/html
+    ports:
+      - "8080:80"
+
+volumes:
+  reports:
+    external: false

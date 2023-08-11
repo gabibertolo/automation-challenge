@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Person</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<h1>Create Person</h1>
+<form id="personForm">
+    <label for="first_name">First Name:</label><br>
+    <input type="text" id="first_name" name="first_name"><br>
+    <label for="last_name">Last Name:</label><br>
+    <input type="text" id="last_name" name="last_name"><br>
+    <label for="age">Age:</label><br>
+    <input type="number" id="age" name="age"><br>
+    <label for="country">Country:</label><br>
+    <select id="country" name="country_id">
+        <option value="">Select a country</option>
+        {{range .Countries}}
+        <option value="{{.ID}}">{{.Name}}</option>
+        {{end}}
+    </select><br><br>
+    <button type="submit">Create Person</button>
+</form>
+
+<script>
+    $(document).ready(function() {
+        $("#personForm").submit(function(event) {
+            event.preventDefault();
+
+            const formData = {
+                first_name: $("#first_name").val(),
+                last_name: $("#last_name").val(),
+                age: parseInt($("#age").val()),
+                country_id: parseInt($("#country").val())
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/bff/persons",
+                contentType: "application/json",
+                data: JSON.stringify(formData),
+                success: function(data) {
+                    alert("Person created successfully");
+                    location.reload();
+                },
+                error: function(error) {
+                    alert("An error occurred: " + error.responseJSON.error);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

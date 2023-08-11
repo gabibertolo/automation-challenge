@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>World View</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/2.1.36/go.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/2.1.36/extensions/SubGraphExpanderButton.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/2.1.36/extensions/PanelExpanderButton.js"></script>
+</head>
+
+<body>
+<h1>World View</h1>
+<div id="world" style="width: 800px; height: 600px;"></div>
+<div id="mySavedModel" style="display: none">
+  {{ .model}}
+</div>
+<script>
+  const $ = go.GraphObject.make;
+  const myDiagram =
+          $(go.Diagram, "world",
+                  { "undoManager.isEnabled": true });
+
+  myDiagram.groupTemplateMap.add("country-node-template", countryGroupTemplate());
+  myDiagram.nodeTemplateMap.add("person-node-template", personNodeTemplate());
+  myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").textContent);
+
+  function countryGroupTemplate() {
+    return $(go.Group, "Auto",
+            {
+              background: "transparent",
+            },
+            new go.Binding("layout", "hasNodes", function (v) {
+              return "grid";
+            }),
+            $(go.Shape, "Rectangle",
+                    {fill: null, stroke: "lightblue", strokeWidth: 2},
+                    new go.Binding("stroke", "horiz", "lightblue"),
+                    new go.Binding("stroke", "color")),
+            $(go.Panel, "Vertical",
+                    $(go.Panel, "Horizontal",  // button next to TextBlock
+                            {stretch: go.GraphObject.Horizontal, background: "lightblue"},
+                            new go.Binding("background", "horiz", "lightblue"),
+                            new go.Binding("background", "color"),
+                            $("SubGraphExpanderButton", {alignment: go.Spot.Right, margin: 5}),
+                            $(go.TextBlock,
+                                    {
+                                      textAlign: "left",
+                                      alignment: go.Spot.Center,
+                                      editable: false,
+                                      margin: 5,
+                                      font: "bold 18px sans-serif",
+                                      opacity: 0.75,
+                                      stroke: "#404040",
+                                    },
+                                    new go.Binding("font", "horiz", "bold 18px sans-serif"),
+                                    new go.Binding("text", "text").makeTwoWay()),
+                    ),
+                    $(go.Placeholder, {padding: 20, alignment: go.Spot.TopLeft})
+            )
+    );
+  }
+
+  function personNodeTemplate() {
+    return $(go.Node, "Auto",
+            { locationSpot: go.Spot.Center },
+            $(go.Shape, "Circle", { fill: "lightgreen" }),
+            $(go.TextBlock, new go.Binding("text", "text"))
+    );
+  }
+</script>
+</body>
+</html>
