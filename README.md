@@ -71,9 +71,9 @@ Response: 204 No Content with payload {"message": "Person deleted successfully"}
 
 #
 ## Requirements:
-This exercise consists of multiple levels with varying degrees of difficulty, and it is required that you create a repository composed of Java 8 and utilize [Cucumber](https://cucumber.io), [Serenity](https://serenity-bdd.info/), and [ScreenPlay](https://serenity-bdd.github.io/docs/screenplay/screenplay_fundamentals) for conducting automated tests on web interfaces and REST APIs.
+This exercise consists of multiple levels with varying degrees of difficulty, and it is required that you create a repository composed of Java and utilize [Cucumber](https://cucumber.io), [Serenity](https://serenity-bdd.info/), and [ScreenPlay](https://serenity-bdd.github.io/docs/screenplay/screenplay_fundamentals) for conducting automated tests on web interfaces and REST APIs.
 
-In this new repository, the automation code and .features files written in [Gherkin](https://cucumber.io/docs/gherkin/) (using BDD approach) for the business test cases must be included. The objective is to validate the functionality of different use cases within this repository. Please note, not all functionalities are correctly implemented; it is in the automation process that identification of correctly functioning features is carried out.
+In a new repository, the automation code and .features files written in [Gherkin](https://cucumber.io/docs/gherkin/) (using BDD approach) for the business test cases must be included. The objective is to validate the functionality of different use cases within this repository. Please note, not all functionalities are correctly implemented; it is in the automation process that identification of correctly functioning features is carried out.
 
 #
 
@@ -101,7 +101,11 @@ Validate, through automation, that the ‘world exploration’ view correctly re
 ###
 #### **Level 5:** *Save and serve automation report*
 
-Serenity generates [reports](https://serenity-bdd.github.io/docs/reporting/the_serenity_reports) detailing the execution of use cases, and those needs to be served within Nginx (which is already configured to run in the Docker Compose setup).
+We require you to package the application to be tested along with your automation code using Docker and adding to the compose file. Also, Serenity generates [reports](https://serenity-bdd.github.io/docs/reporting/the_serenity_reports) detailing the execution of use cases, and those should be saved in a temporal volume in your repository, which will be served by Nginx.
+The deliverable would be a package that should set up the entire system, run automated tests on it, and save the execution report. In summary, the Docker Compose should run all tests and provide the ready-to-access report of its execution.
+
+Here is an architecture diagram in [C4 Model](https://c4model.com) standard with a preview of how this should look:
+![system-pkg-preview.png](docs/guide/assets/images/system-pkg-preview.png)
 
 
 #
