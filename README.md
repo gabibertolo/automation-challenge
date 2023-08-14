@@ -101,7 +101,7 @@ Validate, through automation, that the ‘world exploration’ view correctly re
 ###
 #### **Level 5:** *Save and serve automation report*
 
-We require you to package the application to be tested along with your automation code using Docker and adding to the compose file. Also, Serenity generates [reports](https://serenity-bdd.github.io/docs/reporting/the_serenity_reports) detailing the execution of use cases, and those should be saved in a temporal volume in your repository, which will be served by Nginx.
+We require you to package the application to be tested along with your automation code using Docker and adding to the compose file. Also, Serenity generates [reports](https://serenity-bdd.github.io/docs/reporting/the_serenity_reports) detailing the execution of use cases, and those should be saved in a ephemeral volume in your repository, which will be served by Nginx.
 The deliverable would be a package that should set up the entire system, run automated tests on it, and save the execution report. In summary, the Docker Compose should run all tests and provide the ready-to-access report of its execution.
 
 Here is an architecture diagram in [C4 Model](https://c4model.com) standard with a preview of how this should look:
